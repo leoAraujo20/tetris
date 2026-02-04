@@ -21,8 +21,6 @@ class Game:
             self.position_x, self.position_y, self.cell_size, self.cell_size
         )
         self.dt = 0
-        self.gravity_timer = 0
-        self.gravity_delay = 0.5  # Tempo em segundos entre cada queda de célula
 
     def run(self):
         while self.running:
