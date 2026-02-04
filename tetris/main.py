@@ -21,6 +21,8 @@ class Game:
             self.position_x, self.position_y, self.cell_size, self.cell_size
         )
         self.dt = 0
+        self.gravity_delay = 0.5
+        self.delay_timer = 0
 
     def run(self):
         while self.running:
@@ -59,8 +61,11 @@ class Game:
                 self.block.x += self.cell_size
 
     def _apply_gravity(self):
-        if self.block.y < self.screen.get_height() - self.cell_size:
-            self.block.y += 100 * self.dt
+        self.delay_timer += self.dt
+        if self.delay_timer >= self.gravity_delay:
+            if self.block.y < self.screen.get_height() - self.cell_size:
+                self.block.y += self.cell_size
+                self.delay_timer = 0
 
 
 Game().run()
