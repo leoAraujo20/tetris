@@ -8,6 +8,7 @@ class Game:
         self.fps = 60
         self.screen = pygame.display.set_mode(self.window_size)
         self.clock = pygame.time.Clock()
+        self.cell_default_color = (0, 0, 0)
         self.running = True
         self.position_y = 0
         self.position_x = 0
@@ -21,8 +22,12 @@ class Game:
             self.position_x, self.position_y, self.cell_size, self.cell_size
         )
         self.dt = 0
-        self.gravity_delay = 0.5
+        self.gravity_delay = 1
         self.delay_timer = 0
+        self.board_array = [
+            [self.cell_default_color for _ in range(self.board_collumns)]
+            for _ in range(self.board_lines)
+        ]
 
     def run(self):
         while self.running:
@@ -36,16 +41,15 @@ class Game:
             self._move_left_rigth(keys)
 
             self._draw_board()
-            self._draw_block()
             self._apply_gravity()
-
             pygame.display.flip()
             self.dt = self.clock.tick(self.fps) / 1000
 
     def _draw_board(self):
         for i in range(self.board_lines):
             for j in range(self.board_collumns):
-                pygame.draw.rect(self.screen, "green", self.cell, 1)
+                pygame.draw.rect(self.screen, self.board_array[i][j], self.cell)
+                self._draw_block()
                 self.cell.x = self.cell_size * j
             self.cell.y = self.cell_size * i
 
@@ -66,6 +70,9 @@ class Game:
             if self.block.y < self.screen.get_height() - self.cell_size:
                 self.block.y += self.cell_size
                 self.delay_timer = 0
+            else:
+                self.block.x = 0
+                self.block.y = 0
 
 
 Game().run()
