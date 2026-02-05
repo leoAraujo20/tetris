@@ -41,17 +41,17 @@ class Game:
             self._move_left_rigth(keys)
 
             self._draw_board()
+            self._draw_block()
             self._apply_gravity()
             pygame.display.flip()
             self.dt = self.clock.tick(self.fps) / 1000
 
     def _draw_board(self):
         for i in range(self.board_lines):
-            for j in range(self.board_collumns):
-                pygame.draw.rect(self.screen, self.board_array[i][j], self.cell)
-                self._draw_block()
-                self.cell.x = self.cell_size * j
             self.cell.y = self.cell_size * i
+            for j in range(self.board_collumns):
+                self.cell.x = self.cell_size * j
+                pygame.draw.rect(self.screen, self.board_array[i][j], self.cell)
 
     def _draw_block(self):
         pygame.draw.rect(self.screen, "red", self.block)
@@ -71,8 +71,12 @@ class Game:
                 self.block.y += self.cell_size
                 self.delay_timer = 0
             else:
+                y_update = int(self.block.y / self.cell_size)
+                x_update = int(self.block.x / self.cell_size)
                 self.block.x = 0
                 self.block.y = 0
+                self.board_array[y_update][x_update] = (255, 0, 0)
+                print(self.board_array)
 
 
 Game().run()
