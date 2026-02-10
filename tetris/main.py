@@ -41,8 +41,8 @@ class Game:
             self._move_left_rigth(keys)
 
             self._draw_board()
-            self._draw_block()
             self._apply_gravity()
+            self._draw_block()
             pygame.display.flip()
             self.dt = self.clock.tick(self.fps) / 1000
 
@@ -66,17 +66,24 @@ class Game:
 
     def _apply_gravity(self):
         self.delay_timer += self.dt
+
         if self.delay_timer >= self.gravity_delay:
+            self.delay_timer = 0
+            x_update = int(self.block.x / self.cell_size)
+            y_update = int(self.block.y / self.cell_size)
+
             if self.block.y < self.screen.get_height() - self.cell_size:
                 self.block.y += self.cell_size
-                self.delay_timer = 0
+                next_y = int(self.block.y / self.cell_size)
+                if self.board_array[next_y][x_update] == (255, 0, 0):
+                    self.block.x = 0
+                    self.block.y = 0
+                    self.board_array[y_update][x_update] = (255, 0, 0)
             else:
                 y_update = int(self.block.y / self.cell_size)
-                x_update = int(self.block.x / self.cell_size)
                 self.block.x = 0
                 self.block.y = 0
                 self.board_array[y_update][x_update] = (255, 0, 0)
-                print(self.board_array)
 
 
 Game().run()
