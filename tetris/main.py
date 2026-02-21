@@ -22,9 +22,9 @@ class Game:
             self.position_x, self.position_y, self.cell_size, self.cell_size
         )
         self.dt = 0
-        self.gravity_delay = 1
+        self.gravity_delay = 0.5
         self.delay_timer = 0
-        self.board_array = [
+        self.board_array: list[list[tuple]] = [
             [self.cell_default_color for _ in range(self.board_collumns)]
             for _ in range(self.board_lines)
         ]
@@ -75,15 +75,17 @@ class Game:
             if self.block.y < self.screen.get_height() - self.cell_size:
                 self.block.y += self.cell_size
                 next_y = int(self.block.y / self.cell_size)
-                if self.board_array[next_y][x_update] == (255, 0, 0):
-                    self.block.x = 0
-                    self.block.y = 0
-                    self.board_array[y_update][x_update] = (255, 0, 0)
+                if not self._check_collision(next_y, x_update):
+                    self._reset_position(y_update, x_update)
             else:
-                y_update = int(self.block.y / self.cell_size)
-                self.block.x = 0
-                self.block.y = 0
-                self.board_array[y_update][x_update] = (255, 0, 0)
+                self._reset_position(y_update, x_update)
+
+    def _reset_position(self, y, x):
+        self.block.x = 0
+        self.block.y = 0
+        self.board_array[y][x] = (255, 0, 0)
+
+    def _check_collision(self, y, x): ...
 
 
 Game().run()
