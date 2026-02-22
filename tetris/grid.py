@@ -18,14 +18,14 @@ class Grid:
     def draw(self, screen):
         for line in range(self.lines):
             for collumn in range(self.collumns):
-                color = self.grid[line][collumn]
+                cell_pos = self.grid[line][collumn]
                 cell_rect = pygame.Rect(
-                    line * self.cell_size + 1,
                     collumn * self.cell_size + 1,
+                    line * self.cell_size + 1,
                     self.cell_size - 1,
                     self.cell_size - 1,
                 )
-                pygame.draw.rect(screen, color, cell_rect)
+                pygame.draw.rect(screen, self.colors[cell_pos], cell_rect)
 
     def _get_colors(self):
         gray = (146, 146, 146)
