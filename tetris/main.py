@@ -1,5 +1,6 @@
 import pygame
 from grid import Grid
+from tetrominos import ITetromino
 
 
 class Game:
@@ -8,6 +9,7 @@ class Game:
         self.window_size = (400, 800)
         self.fps = 60
         self.screen = pygame.display.set_mode(self.window_size)
+        self.current_block = ITetromino()
         self.clock = pygame.time.Clock()
         self.running = True
         self.dt = 0
@@ -23,6 +25,7 @@ class Game:
 
             self.screen.fill("black")
             self.game_grid.draw(self.screen)
+            self.current_block.draw(self.screen)
             pygame.display.flip()
             self.dt = self.clock.tick(self.fps) / 1000
 
