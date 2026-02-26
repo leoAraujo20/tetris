@@ -4,25 +4,25 @@ from colors import Colors
 
 class Grid:
     def __init__(self) -> None:
-        self.collumns = 10
-        self.lines = 20
+        self.columns = 10
+        self.rows = 20
         self.cell_size = 40
-        self.grid = [[0 for _ in range(self.collumns)] for _ in range(self.lines)]
+        self.grid = [[0 for _ in range(self.columns)] for _ in range(self.rows)]
         self.colors = Colors.get_colors()
 
     def output_grid(self) -> None:
-        for line in range(self.lines):
-            for collumn in range(self.collumns):
-                print(self.grid[line][collumn], end=" ")
+        for row in range(self.rows):
+            for Column in range(self.columns):
+                print(self.grid[row][Column], end=" ")
             print()
 
     def draw(self, screen):
-        for line in range(self.lines):
-            for collumn in range(self.collumns):
-                cell_pos = self.grid[line][collumn]
+        for row in range(self.rows):
+            for column in range(self.columns):
+                cell_pos = self.grid[row][column]
                 cell_rect = pygame.Rect(
-                    collumn * self.cell_size + 1,
-                    line * self.cell_size + 1,
+                    column * self.cell_size + 1,
+                    row * self.cell_size + 1,
                     self.cell_size - 1,
                     self.cell_size - 1,
                 )
