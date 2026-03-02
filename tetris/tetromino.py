@@ -9,21 +9,21 @@ class Tetromino:
         self.cell_size = 40
         self.cells = {}
         self.rotation_state = 0
-        self.row_offset = 3
-        self.column_offset = 5
+        self.row_offset = 0
+        self.column_offset = 0
         self.colors = Colors.get_colors()
 
-    def _get_positions(self) -> list[Position]:
+    def get_positions(self) -> list[Position]:
         blocks = self.cells[self.rotation_state]
         positions = []
         for position in blocks:
             positions.append(
-                Position(position.x + self.column_offset, position.y + self.row_offset)
+                Position(position.y + self.row_offset, position.x + self.column_offset)
             )
         return positions
 
     def draw(self, screen) -> None:
-        positions = self._get_positions()
+        positions = self.get_positions()
         for position in positions:
             block_rect = pygame.Rect(
                 position.x * self.cell_size + 1,

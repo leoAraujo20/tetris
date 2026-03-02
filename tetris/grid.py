@@ -27,3 +27,8 @@ class Grid:
                     self.cell_size - 1,
                 )
                 pygame.draw.rect(screen, self.colors[cell_pos], cell_rect)
+
+    def is_inside(self, row, column) -> bool:
+        if row < 0 or row >= self.rows or column < 0 or column >= self.columns:
+            return False
+        return True
