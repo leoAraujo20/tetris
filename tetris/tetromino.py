@@ -36,3 +36,13 @@ class Tetromino:
     def move(self, rows, columns) -> None:
         self.row_offset += rows
         self.column_offset += columns
+
+    def rotate(self) -> None:
+        self.rotation_state += 1
+        if self.rotation_state >= len(self.cells.keys()):
+            self.rotation_state = 0
+
+    def undo_rotation(self) -> None:
+        self.rotation_state -= 1
+        if self.rotation_state < 0:
+            self.rotation_state = len(self.cells.keys()) - 1
