@@ -41,7 +41,7 @@ class Game:
         self.current_tetro.move(1, 0)
         if not self._is_inside():
             self.current_tetro.move(-1, 0)
-            self._block_positions()
+            self._lock_positions()
             self.current_tetro = self._get_random_tetro()
 
     def rotate(self):
