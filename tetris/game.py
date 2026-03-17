@@ -29,29 +29,29 @@ class Game:
 
     def move_left(self):
         self.current_tetro.move(0, -1)
-        if not self._is_inside():
+        if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, 1)
 
     def move_rigth(self):
         self.current_tetro.move(0, 1)
-        if not self._is_inside():
+        if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, -1)
 
     def move_down(self):
         self.current_tetro.move(1, 0)
-        if not self._is_inside():
+        if not self._is_inside() or self._has_collision():
             self.current_tetro.move(-1, 0)
             self._lock_positions()
             self.current_tetro = self._get_random_tetro()
 
     def rotate(self):
         self.current_tetro.rotate()
-        if not self._is_inside():
+        if not self._is_inside() or self._has_collision():
             self.current_tetro.undo_rotation()
 
     def undo_rotation(self):
         self.current_tetro.undo_rotation()
-        if not self._is_inside():
+        if not self._is_inside() or self._has_collision():
             self.current_tetro.rotate()
 
     def _lock_positions(self):
@@ -67,6 +67,13 @@ class Game:
             if not self.game_grid.is_inside(position.y, position.x):
                 return False
         return True
+
+    def _has_collision(self):
+        positions = self.current_tetro.get_positions()
+        for position in positions:
+            if self.game_grid.has_collison(position.y, position.x):
+                return True
+        return False
 
     def _get_random_tetro(self) -> Tetromino:
         if len(self.tetros) == 0:

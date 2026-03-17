@@ -32,3 +32,8 @@ class Grid:
         if row < 0 or row >= self.rows or column < 0 or column >= self.columns:
             return False
         return True
+
+    def has_collison(self, row, column):
+        if self.grid[row][column]:
+            return True
+        return False
