@@ -37,3 +37,15 @@ class Grid:
         if self.grid[row][column]:
             return True
         return False
+
+    def clear_rows(self):
+        for row in self.grid:
+            if self._row_is_full(row):
+                self.grid.remove(row)
+                self.grid.insert(0, [0 for _ in range(self.columns)])
+
+    def _row_is_full(self, row):
+        for column in row:
+            if column == 0:
+                return False
+        return True

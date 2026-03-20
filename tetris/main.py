@@ -17,8 +17,6 @@ while game.running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            print(game.game_grid.colors)
-            game.game_grid.output_grid()
             game.running = False
 
         if event.type == game.timer_event:

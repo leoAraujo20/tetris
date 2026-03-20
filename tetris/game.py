@@ -23,7 +23,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
         self.game_grid = game_grid
-        self.time_delay = 1000
+        self.time_delay = 500
         self.timer_event = pygame.USEREVENT + 1
         pygame.time.set_timer(self.timer_event, self.time_delay)
 
@@ -58,6 +58,7 @@ class Game:
         positions = self.current_tetro.get_positions()
         for position in positions:
             self.game_grid.grid[position.y][position.x] = self.current_tetro.id
+        self.game_grid.clear_rows()
         self.current_tetro = self.next_tetro
         self.next_tetro = self._get_random_tetro()
 
