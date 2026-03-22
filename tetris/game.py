@@ -61,6 +61,7 @@ class Game:
         self.game_grid.clear_rows()
         self.current_tetro = self.next_tetro
         self.next_tetro = self._get_random_tetro()
+        self.check_game_over()
 
     def _is_inside(self):
         positions = self.current_tetro.get_positions()
@@ -88,3 +89,7 @@ class Game:
         tetro = random.choice(self.tetros)
         self.tetros.remove(tetro)
         return tetro
+
+    def check_game_over(self):
+        if self._has_collision():
+            self.running = False
