@@ -33,7 +33,7 @@ class OTetromino(Tetromino):
         self.cells = {
             0: [Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1)],
         }
-        self.move(0, 3)
+        self.move(0, 4)
 
 
 class LTetromino(Tetromino):

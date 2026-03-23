@@ -21,7 +21,7 @@ class Game:
         self.current_tetro = self._get_random_tetro()
         self.next_tetro = self._get_random_tetro()
         self.clock = pygame.time.Clock()
-        self.running = True
+        self.state = "playing"
         self.game_grid = game_grid
         self.time_delay = 500
         self.timer_event = pygame.USEREVENT + 1
@@ -92,4 +92,4 @@ class Game:
 
     def check_game_over(self):
         if self._has_collision():
-            self.running = False
+            self.state = "game_over"
