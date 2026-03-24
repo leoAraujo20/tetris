@@ -9,7 +9,6 @@ from tetrominos import *
 class Game:
     def __init__(self, screen: pygame.Surface, game_grid: Grid):
         pygame.init()
-        self.fps = 60
         self.screen = screen
         self.tetros = [
             ITetromino(),
@@ -18,21 +17,28 @@ class Game:
             LTetromino(),
             ZTetromino(),
         ]
+        self.game_grid = game_grid
         self.current_tetro = self._get_random_tetro()
         self.next_tetro = self._get_random_tetro()
-        self.clock = pygame.time.Clock()
         self.state = "playing"
-        self.game_grid = game_grid
+        self.score = 0
+        self.clock = pygame.time.Clock()
         self.time_delay = 500
         self.timer_event = pygame.USEREVENT + 1
         pygame.time.set_timer(self.timer_event, self.time_delay)
+
+    def reset(self):
+        self.game_grid.clear()
+        self.current_tetro = self._get_random_tetro()
+        self.next_tetro = self._get_random_tetro()
+        self.state = "playing"
 
     def move_left(self):
         self.current_tetro.move(0, -1)
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, 1)
 
-    def move_rigth(self):
+    def move_right(self):
         self.current_tetro.move(0, 1)
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, -1)
@@ -42,7 +48,6 @@ class Game:
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(-1, 0)
             self._lock_positions()
-            self.current_tetro = self._get_random_tetro()
 
     def rotate(self):
         self.current_tetro.rotate()
@@ -58,7 +63,7 @@ class Game:
         positions = self.current_tetro.get_positions()
         for position in positions:
             self.game_grid.grid[position.y][position.x] = self.current_tetro.id
-        self.game_grid.clear_rows()
+        self.score += self.game_grid.clear_rows() * 40
         self.current_tetro = self.next_tetro
         self.next_tetro = self._get_random_tetro()
         self.check_game_over()

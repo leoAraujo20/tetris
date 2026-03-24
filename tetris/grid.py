@@ -38,14 +38,20 @@ class Grid:
             return True
         return False
 
-    def clear_rows(self):
+    def clear_rows(self) -> int:
+        rows_cleared = 0
         for row in self.grid:
             if self._row_is_full(row):
                 self.grid.remove(row)
                 self.grid.insert(0, [0 for _ in range(self.columns)])
+                rows_cleared += 1
+        return rows_cleared
 
     def _row_is_full(self, row):
         for column in row:
             if column == 0:
                 return False
         return True
+
+    def clear(self):
+        self.grid = [[0 for _ in range(self.columns)] for _ in range(self.rows)]
