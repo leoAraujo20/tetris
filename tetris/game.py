@@ -16,6 +16,8 @@ class Game:
             OTetromino(),
             LTetromino(),
             ZTetromino(),
+            TTetromino(),
+            JTetromino(),
         ]
         self.game_grid = game_grid
         self.current_tetro = self._get_random_tetro()
@@ -90,6 +92,8 @@ class Game:
                 OTetromino(),
                 LTetromino(),
                 ZTetromino(),
+                TTetromino(),
+                JTetromino(),
             ]
         tetro = random.choice(self.tetros)
         self.tetros.remove(tetro)

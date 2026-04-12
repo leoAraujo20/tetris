@@ -16,7 +16,7 @@ class ITetromino(Tetromino):
 
 
 class STetromino(Tetromino):
-    def __init__(self, id=2):
+    def __init__(self, id=2) -> None:
         super().__init__(id)
         self.cells = {
             0: [Position(0, 1), Position(0, 2), Position(1, 0), Position(1, 1)],
@@ -28,7 +28,7 @@ class STetromino(Tetromino):
 
 
 class OTetromino(Tetromino):
-    def __init__(self, id=3):
+    def __init__(self, id=3) -> None:
         super().__init__(id)
         self.cells = {
             0: [Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1)],
@@ -37,7 +37,7 @@ class OTetromino(Tetromino):
 
 
 class LTetromino(Tetromino):
-    def __init__(self, id=4):
+    def __init__(self, id=4) -> None:
         super().__init__(id)
         self.cells = {
             0: [Position(0, 2), Position(1, 0), Position(1, 1), Position(1, 2)],
@@ -49,12 +49,36 @@ class LTetromino(Tetromino):
 
 
 class ZTetromino(Tetromino):
-    def __init__(self, id=5):
+    def __init__(self, id=5) -> None:
         super().__init__(id)
         self.cells = {
             0: [Position(0, 0), Position(0, 1), Position(1, 1), Position(1, 2)],
             1: [Position(0, 2), Position(1, 1), Position(1, 2), Position(2, 1)],
             2: [Position(1, 0), Position(1, 1), Position(2, 1), Position(2, 2)],
             3: [Position(0, 1), Position(1, 1), Position(1, 0), Position(2, 0)],
+        }
+        self.move(0, 3)
+
+
+class TTetromino(Tetromino):
+    def __init__(self, id=6) -> None:
+        super().__init__(id)
+        self.cells = {
+            0: [Position(0, 0), Position(0, 1), Position(0, 2), Position(1, 1)],
+            1: [Position(0, 1), Position(1, 0), Position(1, 1), Position(2, 1)],
+            2: [Position(0, 1), Position(1, 0), Position(1, 1), Position(1, 2)],
+            3: [Position(0, 1), Position(1, 1), Position(1, 2), Position(2, 1)],
+        }
+        self.move(0, 3)
+
+
+class JTetromino(Tetromino):
+    def __init__(self, id=7) -> None:
+        super().__init__(id)
+        self.cells = {
+            0: [Position(0, 0), Position(1, 2), Position(1, 1), Position(1, 0)],
+            1: [Position(0, 1), Position(1, 1), Position(2, 1), Position(2, 0)],
+            2: [Position(1, 2), Position(1, 1), Position(1, 0), Position(2, 2)],
+            3: [Position(0, 2), Position(0, 1), Position(1, 1), Position(2, 1)],
         }
         self.move(0, 3)
