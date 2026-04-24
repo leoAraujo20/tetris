@@ -22,12 +22,12 @@ class Tetromino:
             )
         return positions
 
-    def draw(self, screen) -> None:
+    def draw(self, screen, offset_x=0, offset_y=0) -> None:
         positions = self.get_positions()
         for position in positions:
             block_rect = pygame.Rect(
-                position.x * self.cell_size + 1,
-                position.y * self.cell_size + 1,
+                position.x * self.cell_size + 1 + offset_x,
+                position.y * self.cell_size + 1 + offset_y,
                 self.cell_size - 1,
                 self.cell_size - 1,
             )
