@@ -42,6 +42,7 @@ while game.state != "quit":
 
     pygame.draw.rect(screen, "gray", score_value_rect)
     pygame.draw.rect(screen, "gray", next_tetro_rect)
+    game.draw_next_tetro(screen)
 
     screen.blit(
         score_value,

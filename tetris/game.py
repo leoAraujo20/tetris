@@ -99,6 +99,14 @@ class Game:
         self.tetros.remove(tetro)
         return tetro
 
+    def draw_next_tetro(self, screen):
+        if self.next_tetro.id == 3:
+            self.next_tetro.draw(screen, 350, 310)
+        elif self.next_tetro.id == 1:
+            self.next_tetro.draw(screen, 350, 330)
+        else:
+            self.next_tetro.draw(screen, 370, 310)
+
     def check_game_over(self):
         if self._has_collision():
             self.state = "game_over"
