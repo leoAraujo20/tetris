@@ -17,6 +17,7 @@ score_value_rect = pygame.Rect(450, 100, 200, 50)
 next_tetro_rect = pygame.Rect(450, 250, 200, 200)
 
 screen = pygame.display.set_mode((700, 800))
+pygame.display.set_caption("Tetris Pythônico")
 game_grid = Grid()
 game = Game(screen, game_grid)
 FPS = 60
