@@ -2,6 +2,10 @@
 
 Um clone clássico do Tetris desenvolvido com Python e Pygame CE.
 
+## 📸 Preview
+
+![Screenshot do jogo](images/tetris_game.png)
+
 ## 🚀 Como Executar
 
 ### Pré-requisitos
