@@ -28,6 +28,13 @@ class Game:
         self.time_delay = 500
         self.timer_event = pygame.USEREVENT + 1
         pygame.time.set_timer(self.timer_event, self.time_delay)
+        self.move_sound = pygame.mixer.Sound("sounds/Tetris (GB) (18)-move_piece.wav")
+        self.rotate_sound = pygame.mixer.Sound(
+            "sounds/Tetris (GB) (19)-rotate_piece.wav"
+        )
+        self.line_clear_sound = pygame.mixer.Sound(
+            "sounds/Tetris (GB) (21)-line_clear.wav"
+        )
 
     def reset(self):
         self.game_grid.clear()
@@ -36,27 +43,32 @@ class Game:
         self.state = "playing"
 
     def move_left(self):
+        self.move_sound.play()
         self.current_tetro.move(0, -1)
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, 1)
 
     def move_right(self):
+        self.move_sound.play()
         self.current_tetro.move(0, 1)
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(0, -1)
 
     def move_down(self):
+        self.move_sound.play()
         self.current_tetro.move(1, 0)
         if not self._is_inside() or self._has_collision():
             self.current_tetro.move(-1, 0)
             self._lock_positions()
 
     def rotate(self):
+        self.rotate_sound.play()
         self.current_tetro.rotate()
         if not self._is_inside() or self._has_collision():
             self.current_tetro.undo_rotation()
 
     def undo_rotation(self):
+        self.rotate_sound.play()
         self.current_tetro.undo_rotation()
         if not self._is_inside() or self._has_collision():
             self.current_tetro.rotate()
@@ -65,7 +77,10 @@ class Game:
         positions = self.current_tetro.get_positions()
         for position in positions:
             self.game_grid.grid[position.y][position.x] = self.current_tetro.id
-        self.score += self.game_grid.clear_rows() * 40
+        cleared_rows = self.game_grid.clear_rows()
+        if cleared_rows > 0:
+            self.line_clear_sound.play()
+            self.score += cleared_rows * 40
         self.current_tetro = self.next_tetro
         self.next_tetro = self._get_random_tetro()
         self.check_game_over()

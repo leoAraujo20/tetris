@@ -4,6 +4,9 @@ from grid import Grid
 
 pygame.init()
 
+pygame.mixer.music.load("sounds/tetris_music.mp3")
+pygame.mixer.music.play(-1)
+
 font = pygame.font.Font(None, 36)
 text_game_over = font.render("Fim de Jogo", True, "white")
 text_score = font.render("Pontuação", True, "white")
