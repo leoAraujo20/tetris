@@ -39,7 +39,7 @@ while game.state != "quit":
                 game.reset()
 
     score_value = font.render(str(game.score), True, "white")
-    game.screen.fill("black")
+    game.screen.fill((35, 44, 51))
     game.game_grid.draw(game.screen)
     screen.blit(text_score, text_score_rect)
     screen.blit(text_next_tetro, text_next_tetro_rect)
